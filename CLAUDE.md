@@ -8,6 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Course**: [DataTalksClub Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp)
 **Project requirements**: https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/projects
+**Dataset**: [IEEE-CIS Fraud Detection](https://www.kaggle.com/competitions/ieee-fraud-detection) — real anonymized e-commerce transaction data from Vesta Corporation (590K transactions, 400+ features, fraud labels)
 
 ## Technology Stack
 
@@ -19,10 +20,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Data Lake | Google Cloud Storage |
 | Data Warehouse | BigQuery (partitioned + clustered tables) |
 | Batch Processing | Apache Spark (PySpark) |
-| Stream Processing | Apache Kafka |
+| Stream Processing | Redpanda |
 | Transformations | dbt |
 | Dashboard | Looker Studio or Streamlit |
-| Dataset | [PaySim](https://www.kaggle.com/datasets/ealaxi/paysim1) synthetic financial transactions |
+| Dataset | [IEEE-CIS Fraud Detection](https://www.kaggle.com/competitions/ieee-fraud-detection) — real Vesta Corp e-commerce transactions |
 
 ## Build Sequence
 
@@ -51,9 +52,9 @@ Follow these phases in order — each builds on the previous:
 - `mart_risk_summary` — aggregated risk metrics for dashboard
 
 ### Phase 5: Streaming Pipeline
-- Kafka producer: replay PaySim transactions as a stream
-- Kafka consumer: write to GCS/BigQuery in near-real-time
-- Airflow DAG or Kafka Connect for orchestration
+- Redpanda producer: replay PaySim transactions as a stream
+- Redpanda consumer: write to GCS/BigQuery in near-real-time
+- Airflow DAG or Redpanda Connect (Kafka-compatible API) for orchestration
 
 ### Phase 6: Dashboard
 - Two required tiles: categorical distribution (fraud by type) + temporal distribution (fraud trend over time)
@@ -77,12 +78,47 @@ Follow these phases in order — each builds on the previous:
 | Dashboard | 2+ tiles (categorical + temporal) |
 | Reproducibility | Clear, working setup instructions |
 
+## Development Environment
+
+- **`uv`** — Python package manager for local dev tools (dbt, kaggle CLI, scripts, PySpark)
+  - Dependencies defined in `pyproject.toml`, locked in `uv.lock`
+  - Run any tool: `uv run <command>` (auto-activates venv)
+- **Docker** — Airflow runs in Docker Compose (isolated, matches production)
+  - Start: `cd airflow && docker compose up -d`
+  - UI: http://localhost:8080 (admin/admin)
+  - Airflow 2.11.2 (latest 2.x — Airflow 3 has breaking changes incompatible with course material)
+
+## Common Commands
+
+```bash
+# dbt (via uv — no manual venv activation needed)
+cd dbt && uv run dbt run              # run all models
+cd dbt && uv run dbt run -s model_name  # run single model
+cd dbt && uv run dbt test               # run data tests
+
+# Airflow (Docker)
+cd airflow && docker compose up -d    # start
+cd airflow && docker compose down     # stop
+cd airflow && docker compose logs -f  # tail logs
+
+# Batch ingestion
+uv run python scripts/ingest_to_gcs.py  # full pipeline: Kaggle → Parquet → GCS → BigQuery
+
+# Add a new dependency
+uv add <package-name>
+
+# Terraform
+cd terraform && terraform plan       # preview changes
+cd terraform && terraform apply      # apply changes
+```
+
 ## Project Conventions
 
 - **GCS structure**: `gs://<bucket>/raw/`, `/staged/`, `/curated/`
 - **BigQuery datasets**: `raw`, `staging`, `production`
 - **Airflow DAGs**: prefixed `risk_` (e.g., `risk_batch_ingest`)
 - **dbt models**: follow staging → intermediate → mart layering
+- **GCP region**: `asia-southeast1` (Singapore) for all resources — GCS bucket, BigQuery dataset, Compute Engine. Keep everything in the same region; cross-region data transfer is what drives costs.
 - **Terraform**: all resources in `terraform/` directory, variables in `terraform/variables.tf`
 - **Secrets**: use GCP Secret Manager or environment variables; never commit credentials
 
@@ -92,6 +128,6 @@ Follow these phases in order — each builds on the previous:
 - `airflow/dags/` — Airflow DAG definitions
 - `airflow/plugins/` — custom operators/hooks
 - `dbt/` — dbt project (models, tests, macros)
-- `kafka/` — producer/consumer scripts
+- `redpanda/` — producer/consumer scripts
 - `spark/` — PySpark batch jobs
 - `dashboard/` — Streamlit app (if not using Looker Studio)

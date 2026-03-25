@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: raw_data
+    database: financial-risk-control-system
+    schema: staging
+    description: "Staged IEEE-CIS fraud detection data (typed, from raw external tables)"
+    tables:
+      - name: transactions
+        description: "590K e-commerce transactions with isFraud label"
+        columns:
+          - name: TransactionID
+            description: "Unique transaction identifier"
+            tests:
+              - unique
+              - not_null
+          - name: isFraud
+            description: "Binary fraud label (1=fraud)"
+            tests:
+              - not_null
+      - name: identity
+        description: "Identity/device features for a subset of transactions"
+        columns:
+          - name: TransactionID
+            description: "Foreign key to transactions"
+            tests:
+              - not_null
