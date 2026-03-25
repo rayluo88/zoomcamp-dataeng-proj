@@ -26,3 +26,11 @@ dbt/.user.yml
 # env files
 .env
 .env.*
+
+# Playwright temp files
+.playwright-mcp/
+
+# Raw data (large files — upload to GCS instead)
+data/*.csv
+data/*.zip
+data/*.parquet
