@@ -1,0 +1,28 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# GCP credentials — never commit
+credentials/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Airflow
+airflow/logs/
+airflow.db
+
+# dbt
+dbt/target/
+dbt/logs/
+dbt/.user.yml
+
+# env files
+.env
+.env.*
