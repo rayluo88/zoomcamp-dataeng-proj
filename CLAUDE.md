@@ -83,10 +83,10 @@ Follow these phases in order — each builds on the previous:
 - **`uv`** — Python package manager for local dev tools (dbt, kaggle CLI, scripts, PySpark)
   - Dependencies defined in `pyproject.toml`, locked in `uv.lock`
   - Run any tool: `uv run <command>` (auto-activates venv)
-- **Docker** — Airflow runs in Docker Compose (isolated, matches production)
-  - Start: `cd airflow && docker compose up -d`
-  - UI: http://localhost:8080 (admin/admin)
+- **Docker** — Airflow and Redpanda run in Docker Compose
+  - Airflow: `cd airflow && docker compose up -d` → UI: http://localhost:8080 (admin/admin)
   - Airflow 2.11.2 (latest 2.x — Airflow 3 has breaking changes incompatible with course material)
+  - Redpanda: `cd redpanda && docker compose up -d` → Console UI: http://localhost:8080
 
 ## Common Commands
 
@@ -103,6 +103,14 @@ cd airflow && docker compose logs -f  # tail logs
 
 # Batch ingestion
 uv run python scripts/ingest_to_gcs.py  # full pipeline: Kaggle → Parquet → GCS → BigQuery
+
+# Redpanda (streaming)
+cd redpanda && docker compose up -d                                        # start broker + console
+docker exec redpanda rpk topic create ieee_cis_transactions --partitions 3 # create topic (first time)
+uv run python redpanda/producer.py --limit 1000 --speed 3600               # replay 1000 rows
+uv run python redpanda/producer.py --dry-run --limit 5                     # test without broker
+uv run python redpanda/consumer.py                                         # consume → GCS + BigQuery
+uv run python redpanda/consumer.py --no-gcs --no-bq                       # consume, discard output
 
 # Add a new dependency
 uv add <package-name>

@@ -21,12 +21,12 @@ services:
     command:
       - redpanda
       - start
-      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:9092
-      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:9092
-      - --pandaproxy-addr internal://0.0.0.0:18082,external://0.0.0.0:18082
-      - --advertise-pandaproxy-addr internal://redpanda:18082,external://localhost:18082
-      - --schema-registry-addr internal://0.0.0.0:18081,external://0.0.0.0:18081
-      - --rpc-addr redpanda:33145
+      - --kafka-addr 0.0.0.0:9092
+      - --advertise-kafka-addr localhost:9092
+      - --pandaproxy-addr 0.0.0.0:18082
+      - --advertise-pandaproxy-addr localhost:18082
+      - --schema-registry-addr 0.0.0.0:18081
+      - --rpc-addr 0.0.0.0:33145
       - --advertise-rpc-addr redpanda:33145
       - --smp 1
       - --memory 1G
