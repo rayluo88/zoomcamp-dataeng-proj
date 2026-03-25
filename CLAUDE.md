@@ -112,6 +112,11 @@ uv run python redpanda/producer.py --dry-run --limit 5                     # tes
 uv run python redpanda/consumer.py                                         # consume → GCS + BigQuery
 uv run python redpanda/consumer.py --no-gcs --no-bq                       # consume, discard output
 
+# Dashboard (Evidence.dev)
+cd dashboard && npm run sources    # pull latest data from BigQuery
+cd dashboard && npm run dev        # local preview at http://localhost:3000
+cd dashboard && npm run build      # production build → ./build/
+
 # Add a new dependency
 uv add <package-name>
 

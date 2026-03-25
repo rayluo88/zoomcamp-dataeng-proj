@@ -1,0 +1,6 @@
+name: bigquery
+type: bigquery
+options:
+  project_id: financial-risk-control-system
+  location: asia-southeast1
+  authenticator: gcloud-cli
