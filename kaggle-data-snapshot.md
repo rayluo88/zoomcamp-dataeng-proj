@@ -1,0 +1,652 @@
+- generic [ref=e2]:
+  - navigation "Main Kaggle page navigation" [ref=e3]:
+    - generic [ref=e5]:
+      - button "Navigation menu" [ref=e7] [cursor=pointer]: menu
+      - link "Skip to content" [ref=e8] [cursor=pointer]:
+        - /url: "#site-content"
+        - text: Skip to
+        - text: content
+      - link "Return to Kaggle home page" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Kaggle" [ref=e11]
+    - button "Create" [ref=e13] [cursor=pointer]:
+      - img [ref=e14]
+      - generic [ref=e19]: Create
+    - generic [ref=e20]:
+      - generic [ref=e22]:
+        - list [ref=e23]:
+          - listitem "Home List Item" [ref=e24]:
+            - link "Home" [ref=e26] [cursor=pointer]:
+              - /url: /
+              - generic [ref=e27]:
+                - generic [ref=e30]: explore
+                - paragraph [ref=e32]: Home
+          - listitem "Competitions List Item" [ref=e33]:
+            - link "Competitions" [ref=e35] [cursor=pointer]:
+              - /url: /competitions
+              - generic [ref=e36]:
+                - generic [ref=e39]: emoji_events
+                - paragraph [ref=e41]: Competitions
+          - listitem "Datasets List Item" [ref=e43]:
+            - link "Datasets" [ref=e45] [cursor=pointer]:
+              - /url: /datasets
+              - generic [ref=e46]:
+                - generic [ref=e49]: table_chart
+                - paragraph [ref=e51]: Datasets
+          - listitem "Models List Item" [ref=e52]:
+            - link "Models" [ref=e54] [cursor=pointer]:
+              - /url: /models
+              - generic [ref=e55]:
+                - generic [ref=e58]: tenancy
+                - paragraph [ref=e60]: Models
+          - listitem "Benchmarks List Item" [ref=e61]:
+            - link "Benchmarks" [ref=e63] [cursor=pointer]:
+              - /url: /benchmarks
+              - generic [ref=e64]:
+                - generic [ref=e67]: leaderboard
+                - paragraph [ref=e69]: Benchmarks
+          - listitem "Game Arena List Item" [ref=e70]:
+            - link "Game Arena" [ref=e72] [cursor=pointer]:
+              - /url: /game-arena
+              - generic [ref=e73]:
+                - generic [ref=e76]: smart_toy
+                - paragraph [ref=e78]: Game Arena
+          - listitem "Code List Item" [ref=e79]:
+            - link "Code" [ref=e81] [cursor=pointer]:
+              - /url: /code
+              - generic [ref=e82]:
+                - generic [ref=e85]: code
+                - paragraph [ref=e87]: Code
+          - listitem "Discussions List Item" [ref=e88]:
+            - link "Discussions" [ref=e90] [cursor=pointer]:
+              - /url: /discussions
+              - generic [ref=e91]:
+                - generic [ref=e94]: comment
+                - paragraph [ref=e96]: Discussions
+          - listitem "Kaggle Learn List Item" [ref=e97]:
+            - link "Kaggle Learn" [ref=e99] [cursor=pointer]:
+              - /url: /learn
+              - generic [ref=e100]:
+                - generic [ref=e103]: school
+                - paragraph [ref=e105]: Learn
+        - list [ref=e106]:
+          - listitem "More on Kaggle List Item" [ref=e107]:
+            - link "More on Kaggle" [ref=e109] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e110]:
+                - generic [ref=e113]: expand_more
+                - paragraph [ref=e115]: More
+      - button "View Active Events" [ref=e117] [cursor=pointer]:
+        - generic [ref=e119]: auto_awesome_motion
+        - paragraph [ref=e120]: View Active Events
+  - navigation "Main menu, search and your account" [ref=e121]:
+    - generic [ref=e122]:
+      - generic [ref=e126]:
+        - generic [ref=e127]: search
+        - textbox "Search" [ref=e128]
+        - group
+      - button "Ray Luo" [ref=e133] [cursor=pointer]:
+        - generic "Ray Luo" [ref=e134]
+        - img [ref=e135]
+  - main [ref=e138]:
+    - generic [ref=e148]:
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - link "IEEE Computational Intelligence Society's profile" [ref=e152] [cursor=pointer]:
+            - /url: /organizations/ieee-cis
+            - generic "IEEE Computational Intelligence Society" [ref=e153]
+            - img [ref=e154]
+          - generic [ref=e157]:
+            - generic [ref=e159]: IEEE Computational Intelligence Society
+            - generic [ref=e160]: · Research Prediction Competition · 6 years ago
+          - generic [ref=e161]:
+            - button "Late Submission" [ref=e163] [cursor=pointer]:
+              - generic [ref=e164]: Late Submission
+            - button "Competition options menu collapsed" [ref=e166] [cursor=pointer]: more_horiz
+        - generic [ref=e168]:
+          - heading "IEEE-CIS Fraud Detection" [level=1] [ref=e169]
+          - paragraph [ref=e171]: Can you detect fraud from customer transactions?
+      - generic [ref=e175]:
+        - tablist [ref=e182]:
+          - tab "Overview, 1 of 9" [ref=e183] [cursor=pointer]:
+            - generic [ref=e184]: Overview
+          - tab "Data, 2 of 9" [selected] [ref=e185] [cursor=pointer]:
+            - generic [ref=e186]: Data
+          - tab "Code, 3 of 9" [ref=e187] [cursor=pointer]:
+            - generic [ref=e188]: Code
+          - tab "Models, 4 of 9" [ref=e189] [cursor=pointer]:
+            - generic [ref=e190]: Models
+          - tab "Discussion, 5 of 9" [ref=e191] [cursor=pointer]:
+            - generic [ref=e192]: Discussion
+          - tab "Leaderboard, 6 of 9" [ref=e193] [cursor=pointer]:
+            - generic [ref=e194]: Leaderboard
+          - tab "Rules, 7 of 9" [ref=e195] [cursor=pointer]:
+            - generic [ref=e196]: Rules
+          - tab "Team, 8 of 9" [ref=e197] [cursor=pointer]:
+            - generic [ref=e198]: Team
+          - tab "Submissions, 9 of 9" [ref=e199] [cursor=pointer]:
+            - generic [ref=e200]: Submissions
+        - separator [ref=e202]
+      - generic [ref=e204]:
+        - generic [ref=e205]:
+          - generic [ref=e207]:
+            - heading "Dataset Description" [level=2] [ref=e212]
+            - generic [ref=e214]:
+              - generic [ref=e218]:
+                - paragraph [ref=e219]:
+                  - text: In this competition you are predicting the probability that an online transaction is fraudulent, as denoted by the binary target
+                  - code [ref=e220]: isFraud
+                  - text: .
+                - paragraph [ref=e221]:
+                  - text: The data is broken into two files
+                  - code [ref=e222]: identity
+                  - text: and
+                  - code [ref=e223]: transaction
+                  - text: ", which are joined by"
+                  - code [ref=e224]: TransactionID
+                  - text: . Not all transactions have corresponding identity information.
+                - heading "Categorical Features - Transaction" [level=3] [ref=e225]
+                - list [ref=e226]:
+                  - listitem [ref=e227]:
+                    - code [ref=e228]: ProductCD
+                  - listitem [ref=e229]:
+                    - code [ref=e230]: card1
+                    - text: "-"
+                    - code [ref=e231]: card6
+                  - listitem [ref=e232]:
+                    - code [ref=e233]: addr1
+                    - text: ","
+                    - code [ref=e234]: addr2
+                  - listitem [ref=e235]:
+                    - code [ref=e236]: P_emaildomain
+                  - listitem [ref=e237]:
+                    - code [ref=e238]: R_emaildomain
+                  - listitem [ref=e239]:
+                    - code [ref=e240]: M1
+                    - text: "-"
+                    - code [ref=e241]: M9
+                - heading "Categorical Features - Identity" [level=3] [ref=e242]
+                - list [ref=e243]:
+                  - listitem [ref=e244]:
+                    - code [ref=e245]: DeviceType
+                  - listitem [ref=e246]:
+                    - code [ref=e247]: DeviceInfo
+                  - listitem [ref=e248]:
+                    - code [ref=e249]: id_12
+                    - text: "-"
+                    - code [ref=e250]: id_38
+                - paragraph [ref=e251]:
+                  - text: The
+                  - code [ref=e252]: TransactionDT
+                  - text: feature is a timedelta from a given reference datetime (not an actual timestamp).
+                - paragraph [ref=e253]:
+                  - text: You can read more about the data from
+                  - link "this post by the competition host (opens in a new tab)" [ref=e254] [cursor=pointer]:
+                    - /url: https://www.kaggle.com/c/ieee-fraud-detection/discussion/101203
+                    - text: this post by the competition host
+                  - text: .
+                - heading "Files" [level=2] [ref=e255]
+                - list [ref=e256]:
+                  - listitem [ref=e257]:
+                    - strong [ref=e258]: "train_{transaction, identity}.csv"
+                    - text: "- the training set"
+                  - listitem [ref=e259]:
+                    - strong [ref=e260]: "test_{transaction, identity}.csv"
+                    - text: "- the test set (you must predict the"
+                    - code [ref=e261]: isFraud
+                    - text: value for these observations)
+                  - listitem [ref=e262]:
+                    - strong [ref=e263]: sample_submission.csv
+                    - text: "- a sample submission file in the correct format"
+              - separator [ref=e265]
+          - generic [ref=e266]:
+            - heading "Files" [level=2] [ref=e267]
+            - paragraph [ref=e268]: 5 files
+            - heading "Size" [level=2] [ref=e269]
+            - paragraph [ref=e270]: 1.35 GB
+            - heading "Type" [level=2] [ref=e271]
+            - paragraph [ref=e272]: csv
+            - heading "License" [level=2] [ref=e273]
+            - paragraph [ref=e274]:
+              - generic [ref=e275] [cursor=pointer]: Subject to Competition Rules
+        - generic [ref=e276]:
+          - generic [ref=e278]:
+            - generic [ref=e280]:
+              - generic [ref=e281]:
+                - heading "sample_submission.csv(6.08 MB)" [level=3] [ref=e282]:
+                  - text: sample_submission.csv
+                  - generic [ref=e283]: (6.08 MB)
+                - button "Download" [ref=e286] [cursor=pointer]: get_app
+                - button "Maximize view" [ref=e289] [cursor=pointer]: fullscreen
+                - button "Hide tree" [ref=e292] [cursor=pointer]: chevron_right
+              - generic [ref=e294]:
+                - tablist [ref=e299]:
+                  - tab "Detail, 1 of 3" [selected] [ref=e300] [cursor=pointer]:
+                    - generic [ref=e301]: Detail
+                  - tab "Compact, 2 of 3" [ref=e302] [cursor=pointer]:
+                    - generic [ref=e303]: Compact
+                  - tab "Column, 3 of 3" [ref=e304] [cursor=pointer]:
+                    - generic [ref=e305]: Column
+                - button "Change displayed columns" [ref=e308] [cursor=pointer]:
+                  - paragraph [ref=e309]: 2 of 2 columns
+                  - generic [ref=e310]: keyboard_arrow_down
+              - table [ref=e311]:
+                - row "TransactionID isFraud" [ref=e312]:
+                  - columnheader "TransactionID" [ref=e313]:
+                    - button "TransactionID" [ref=e314] [cursor=pointer]:
+                      - generic [ref=e315]:
+                        - generic [ref=e316]: vpn_key
+                        - generic "TransactionID" [ref=e317]
+                      - generic [ref=e318]: sort
+                  - columnheader "isFraud" [ref=e319]:
+                    - button "isFraud" [ref=e320] [cursor=pointer]:
+                      - generic [ref=e321]:
+                        - generic [ref=e322]: grid_3x3
+                        - generic "isFraud" [ref=e323]
+                      - generic [ref=e324]: sort
+                - row [ref=e325]:
+                  - figure [ref=e326] [cursor=pointer]:
+                    - generic "A chart." [ref=e331]:
+                      - img "A chart." [ref=e332]
+                      - generic "A tabular representation of the data in the chart." [ref=e390]:
+                        - table [ref=e391]:
+                          - rowgroup [ref=e392]:
+                            - row "Label Count" [ref=e393]:
+                              - columnheader "Label" [ref=e394]
+                              - columnheader "Count" [ref=e395]
+                          - rowgroup [ref=e396]:
+                            - row "3663549.00 - 3673682.80 10,134" [ref=e397]:
+                              - cell "3663549.00 - 3673682.80" [ref=e398]
+                              - cell "10,134" [ref=e399]
+                            - row "3673682.80 - 3683816.60 10,134" [ref=e400]:
+                              - cell "3673682.80 - 3683816.60" [ref=e401]
+                              - cell "10,134" [ref=e402]
+                            - row "3683816.60 - 3693950.40 10,134" [ref=e403]:
+                              - cell "3683816.60 - 3693950.40" [ref=e404]
+                              - cell "10,134" [ref=e405]
+                            - row "3693950.40 - 3704084.20 10,134" [ref=e406]:
+                              - cell "3693950.40 - 3704084.20" [ref=e407]
+                              - cell "10,134" [ref=e408]
+                            - row "3704084.20 - 3714218.00 10,133" [ref=e409]:
+                              - cell "3704084.20 - 3714218.00" [ref=e410]
+                              - cell "10,133" [ref=e411]
+                            - row "3714218.00 - 3724351.80 10,134" [ref=e412]:
+                              - cell "3714218.00 - 3724351.80" [ref=e413]
+                              - cell "10,134" [ref=e414]
+                            - row "3724351.80 - 3734485.60 10,134" [ref=e415]:
+                              - cell "3724351.80 - 3734485.60" [ref=e416]
+                              - cell "10,134" [ref=e417]
+                            - row "3734485.60 - 3744619.40 10,134" [ref=e418]:
+                              - cell "3734485.60 - 3744619.40" [ref=e419]
+                              - cell "10,134" [ref=e420]
+                            - row "3744619.40 - 3754753.20 10,134" [ref=e421]:
+                              - cell "3744619.40 - 3754753.20" [ref=e422]
+                              - cell "10,134" [ref=e423]
+                            - row "3754753.20 - 3764887.00 10,133" [ref=e424]:
+                              - cell "3754753.20 - 3764887.00" [ref=e425]
+                              - cell "10,133" [ref=e426]
+                            - row "3764887.00 - 3775020.80 10,134" [ref=e427]:
+                              - cell "3764887.00 - 3775020.80" [ref=e428]
+                              - cell "10,134" [ref=e429]
+                            - row "3775020.80 - 3785154.60 10,134" [ref=e430]:
+                              - cell "3775020.80 - 3785154.60" [ref=e431]
+                              - cell "10,134" [ref=e432]
+                            - row "3785154.60 - 3795288.40 10,134" [ref=e433]:
+                              - cell "3785154.60 - 3795288.40" [ref=e434]
+                              - cell "10,134" [ref=e435]
+                            - row "3795288.40 - 3805422.20 10,134" [ref=e436]:
+                              - cell "3795288.40 - 3805422.20" [ref=e437]
+                              - cell "10,134" [ref=e438]
+                            - row "3805422.20 - 3815556.00 10,133" [ref=e439]:
+                              - cell "3805422.20 - 3815556.00" [ref=e440]
+                              - cell "10,133" [ref=e441]
+                            - row "3815556.00 - 3825689.80 10,134" [ref=e442]:
+                              - cell "3815556.00 - 3825689.80" [ref=e443]
+                              - cell "10,134" [ref=e444]
+                            - row "3825689.80 - 3835823.60 10,134" [ref=e445]:
+                              - cell "3825689.80 - 3835823.60" [ref=e446]
+                              - cell "10,134" [ref=e447]
+                            - row "3835823.60 - 3845957.40 10,134" [ref=e448]:
+                              - cell "3835823.60 - 3845957.40" [ref=e449]
+                              - cell "10,134" [ref=e450]
+                            - row "3845957.40 - 3856091.20 10,134" [ref=e451]:
+                              - cell "3845957.40 - 3856091.20" [ref=e452]
+                              - cell "10,134" [ref=e453]
+                            - row "3856091.20 - 3866225.00 10,133" [ref=e454]:
+                              - cell "3856091.20 - 3866225.00" [ref=e455]
+                              - cell "10,133" [ref=e456]
+                            - row "3866225.00 - 3876358.80 10,134" [ref=e457]:
+                              - cell "3866225.00 - 3876358.80" [ref=e458]
+                              - cell "10,134" [ref=e459]
+                            - row "3876358.80 - 3886492.60 10,134" [ref=e460]:
+                              - cell "3876358.80 - 3886492.60" [ref=e461]
+                              - cell "10,134" [ref=e462]
+                            - row "3886492.60 - 3896626.40 10,134" [ref=e463]:
+                              - cell "3886492.60 - 3896626.40" [ref=e464]
+                              - cell "10,134" [ref=e465]
+                            - row "3896626.40 - 3906760.20 10,134" [ref=e466]:
+                              - cell "3896626.40 - 3906760.20" [ref=e467]
+                              - cell "10,134" [ref=e468]
+                            - row "3906760.20 - 3916894.00 10,133" [ref=e469]:
+                              - cell "3906760.20 - 3916894.00" [ref=e470]
+                              - cell "10,133" [ref=e471]
+                            - row "3916894.00 - 3927027.80 10,134" [ref=e472]:
+                              - cell "3916894.00 - 3927027.80" [ref=e473]
+                              - cell "10,134" [ref=e474]
+                            - row "3927027.80 - 3937161.60 10,134" [ref=e475]:
+                              - cell "3927027.80 - 3937161.60" [ref=e476]
+                              - cell "10,134" [ref=e477]
+                            - row "3937161.60 - 3947295.40 10,134" [ref=e478]:
+                              - cell "3937161.60 - 3947295.40" [ref=e479]
+                              - cell "10,134" [ref=e480]
+                            - row "3947295.40 - 3957429.20 10,134" [ref=e481]:
+                              - cell "3947295.40 - 3957429.20" [ref=e482]
+                              - cell "10,134" [ref=e483]
+                            - row "3957429.20 - 3967563.00 10,133" [ref=e484]:
+                              - cell "3957429.20 - 3967563.00" [ref=e485]
+                              - cell "10,133" [ref=e486]
+                            - row "3967563.00 - 3977696.80 10,134" [ref=e487]:
+                              - cell "3967563.00 - 3977696.80" [ref=e488]
+                              - cell "10,134" [ref=e489]
+                            - row "3977696.80 - 3987830.60 10,134" [ref=e490]:
+                              - cell "3977696.80 - 3987830.60" [ref=e491]
+                              - cell "10,134" [ref=e492]
+                            - row "3987830.60 - 3997964.40 10,134" [ref=e493]:
+                              - cell "3987830.60 - 3997964.40" [ref=e494]
+                              - cell "10,134" [ref=e495]
+                            - row "3997964.40 - 4008098.20 10,134" [ref=e496]:
+                              - cell "3997964.40 - 4008098.20" [ref=e497]
+                              - cell "10,134" [ref=e498]
+                            - row "4008098.20 - 4018232.00 10,133" [ref=e499]:
+                              - cell "4008098.20 - 4018232.00" [ref=e500]
+                              - cell "10,133" [ref=e501]
+                            - row "4018232.00 - 4028365.80 10,134" [ref=e502]:
+                              - cell "4018232.00 - 4028365.80" [ref=e503]
+                              - cell "10,134" [ref=e504]
+                            - row "4028365.80 - 4038499.60 10,134" [ref=e505]:
+                              - cell "4028365.80 - 4038499.60" [ref=e506]
+                              - cell "10,134" [ref=e507]
+                            - row "4038499.60 - 4048633.40 10,134" [ref=e508]:
+                              - cell "4038499.60 - 4048633.40" [ref=e509]
+                              - cell "10,134" [ref=e510]
+                            - row "4048633.40 - 4058767.20 10,134" [ref=e511]:
+                              - cell "4048633.40 - 4058767.20" [ref=e512]
+                              - cell "10,134" [ref=e513]
+                            - row "4058767.20 - 4068901.00 10,133" [ref=e514]:
+                              - cell "4058767.20 - 4068901.00" [ref=e515]
+                              - cell "10,133" [ref=e516]
+                            - row "4068901.00 - 4079034.80 10,134" [ref=e517]:
+                              - cell "4068901.00 - 4079034.80" [ref=e518]
+                              - cell "10,134" [ref=e519]
+                            - row "4079034.80 - 4089168.60 10,134" [ref=e520]:
+                              - cell "4079034.80 - 4089168.60" [ref=e521]
+                              - cell "10,134" [ref=e522]
+                            - row "4089168.60 - 4099302.40 10,134" [ref=e523]:
+                              - cell "4089168.60 - 4099302.40" [ref=e524]
+                              - cell "10,134" [ref=e525]
+                            - row "4099302.40 - 4109436.20 10,134" [ref=e526]:
+                              - cell "4099302.40 - 4109436.20" [ref=e527]
+                              - cell "10,134" [ref=e528]
+                            - row "4109436.20 - 4119570.00 10,133" [ref=e529]:
+                              - cell "4109436.20 - 4119570.00" [ref=e530]
+                              - cell "10,133" [ref=e531]
+                            - row "4119570.00 - 4129703.80 10,134" [ref=e532]:
+                              - cell "4119570.00 - 4129703.80" [ref=e533]
+                              - cell "10,134" [ref=e534]
+                            - row "4129703.80 - 4139837.60 10,134" [ref=e535]:
+                              - cell "4129703.80 - 4139837.60" [ref=e536]
+                              - cell "10,134" [ref=e537]
+                            - row "4139837.60 - 4149971.40 10,134" [ref=e538]:
+                              - cell "4139837.60 - 4149971.40" [ref=e539]
+                              - cell "10,134" [ref=e540]
+                            - row "4149971.40 - 4160105.20 10,134" [ref=e541]:
+                              - cell "4149971.40 - 4160105.20" [ref=e542]
+                              - cell "10,134" [ref=e543]
+                            - row "4160105.20 - 4170239.00 10,134" [ref=e544]:
+                              - cell "4160105.20 - 4170239.00" [ref=e545]
+                              - cell "10,134" [ref=e546]
+                    - generic [ref=e547]:
+                      - generic [ref=e548]: 3.66m
+                      - generic [ref=e549]: 4.17m
+                  - 'figure "value: 0.50 - 0.50 count: 506691" [ref=e550] [cursor=pointer]':
+                    - generic "A chart." [ref=e555]:
+                      - img "A chart." [ref=e556]
+                      - generic "A tabular representation of the data in the chart." [ref=e565]:
+                        - table [ref=e566]:
+                          - rowgroup [ref=e567]:
+                            - row "Label Count" [ref=e568]:
+                              - columnheader "Label" [ref=e569]
+                              - columnheader "Count" [ref=e570]
+                          - rowgroup [ref=e571]:
+                            - row "0.50 - 0.50 506,691" [ref=e572]:
+                              - cell "0.50 - 0.50" [ref=e573]
+                              - cell "506,691" [ref=e574]
+                    - generic [ref=e575]:
+                      - generic [ref=e576]: "0.5"
+                      - generic [ref=e577]: "0.5"
+                - rowgroup [ref=e578]:
+                  - row "3663549 0.5" [ref=e580]:
+                    - cell "3663549" [ref=e581]
+                    - cell "0.5" [ref=e582]
+                  - row "3663550 0.5" [ref=e584]:
+                    - cell "3663550" [ref=e585]
+                    - cell "0.5" [ref=e586]
+                  - row "3663551 0.5" [ref=e588]:
+                    - cell "3663551" [ref=e589]
+                    - cell "0.5" [ref=e590]
+                  - row "3663552 0.5" [ref=e592]:
+                    - cell "3663552" [ref=e593]
+                    - cell "0.5" [ref=e594]
+                  - row "3663553 0.5" [ref=e596]:
+                    - cell "3663553" [ref=e597]
+                    - cell "0.5" [ref=e598]
+                  - row "3663554 0.5" [ref=e600]:
+                    - cell "3663554" [ref=e601]
+                    - cell "0.5" [ref=e602]
+                  - row "3663555 0.5" [ref=e604]:
+                    - cell "3663555" [ref=e605]
+                    - cell "0.5" [ref=e606]
+                  - row "3663556 0.5" [ref=e608]:
+                    - cell "3663556" [ref=e609]
+                    - cell "0.5" [ref=e610]
+                  - row "3663557 0.5" [ref=e612]:
+                    - cell "3663557" [ref=e613]
+                    - cell "0.5" [ref=e614]
+                  - row "3663558 0.5" [ref=e616]:
+                    - cell "3663558" [ref=e617]
+                    - cell "0.5" [ref=e618]
+                  - row "3663559 0.5" [ref=e620]:
+                    - cell "3663559" [ref=e621]
+                    - cell "0.5" [ref=e622]
+                  - row "3663560 0.5" [ref=e624]:
+                    - cell "3663560" [ref=e625]
+                    - cell "0.5" [ref=e626]
+                  - row "3663561 0.5" [ref=e628]:
+                    - cell "3663561" [ref=e629]
+                    - cell "0.5" [ref=e630]
+                  - row "3663562 0.5" [ref=e632]:
+                    - cell "3663562" [ref=e633]
+                    - cell "0.5" [ref=e634]
+                  - row "3663563 0.5" [ref=e636]:
+                    - cell "3663563" [ref=e637]
+                    - cell "0.5" [ref=e638]
+                  - row "3663564 0.5" [ref=e640]:
+                    - cell "3663564" [ref=e641]
+                    - cell "0.5" [ref=e642]
+                  - row "3663565 0.5" [ref=e644]:
+                    - cell "3663565" [ref=e645]
+                    - cell "0.5" [ref=e646]
+                  - row "3663566 0.5" [ref=e648]:
+                    - cell "3663566" [ref=e649]
+                    - cell "0.5" [ref=e650]
+                  - row "3663567 0.5" [ref=e652]:
+                    - cell "3663567" [ref=e653]
+                    - cell "0.5" [ref=e654]
+                  - row "3663568 0.5" [ref=e656]:
+                    - cell "3663568" [ref=e657]
+                    - cell "0.5" [ref=e658]
+                  - row "3663569 0.5" [ref=e660]:
+                    - cell "3663569" [ref=e661]
+                    - cell "0.5" [ref=e662]
+                  - row "3663570 0.5" [ref=e664]:
+                    - cell "3663570" [ref=e665]
+                    - cell "0.5" [ref=e666]
+                  - row "3663571 0.5" [ref=e668]:
+                    - cell "3663571" [ref=e669]
+                    - cell "0.5" [ref=e670]
+                  - row "3663572 0.5" [ref=e672]:
+                    - cell "3663572" [ref=e673]
+                    - cell "0.5" [ref=e674]
+                  - row "3663573 0.5" [ref=e676]:
+                    - cell "3663573" [ref=e677]
+                    - cell "0.5" [ref=e678]
+                  - row "3663574 0.5" [ref=e680]:
+                    - cell "3663574" [ref=e681]
+                    - cell "0.5" [ref=e682]
+                  - row "3663575 0.5" [ref=e684]:
+                    - cell "3663575" [ref=e685]
+                    - cell "0.5" [ref=e686]
+                  - row "3663576 0.5" [ref=e688]:
+                    - cell "3663576" [ref=e689]
+                    - cell "0.5" [ref=e690]
+                  - row "3663577 0.5" [ref=e692]:
+                    - cell "3663577" [ref=e693]
+                    - cell "0.5" [ref=e694]
+                  - row "3663578 0.5" [ref=e696]:
+                    - cell "3663578" [ref=e697]
+                    - cell "0.5" [ref=e698]
+                  - row "3663579 0.5" [ref=e700]:
+                    - cell "3663579" [ref=e701]
+                    - cell "0.5" [ref=e702]
+                  - row "3663580 0.5" [ref=e704]:
+                    - cell "3663580" [ref=e705]
+                    - cell "0.5" [ref=e706]
+                  - row "3663581 0.5" [ref=e708]:
+                    - cell "3663581" [ref=e709]
+                    - cell "0.5" [ref=e710]
+                  - row "3663582 0.5" [ref=e712]:
+                    - cell "3663582" [ref=e713]
+                    - cell "0.5" [ref=e714]
+                  - row "3663583 0.5" [ref=e716]:
+                    - cell "3663583" [ref=e717]
+                    - cell "0.5" [ref=e718]
+                  - row "3663584 0.5" [ref=e720]:
+                    - cell "3663584" [ref=e721]
+                    - cell "0.5" [ref=e722]
+                  - row "3663585 0.5" [ref=e724]:
+                    - cell "3663585" [ref=e725]
+                    - cell "0.5" [ref=e726]
+                  - row "3663586 0.5" [ref=e728]:
+                    - cell "3663586" [ref=e729]
+                    - cell "0.5" [ref=e730]
+                  - row "3663587 0.5" [ref=e732]:
+                    - cell "3663587" [ref=e733]
+                    - cell "0.5" [ref=e734]
+                  - row "3663588 0.5" [ref=e736]:
+                    - cell "3663588" [ref=e737]
+                    - cell "0.5" [ref=e738]
+                  - row "3663589 0.5" [ref=e740]:
+                    - cell "3663589" [ref=e741]
+                    - cell "0.5" [ref=e742]
+                  - row "3663590 0.5" [ref=e744]:
+                    - cell "3663590" [ref=e745]
+                    - cell "0.5" [ref=e746]
+                  - row "3663591 0.5" [ref=e748]:
+                    - cell "3663591" [ref=e749]
+                    - cell "0.5" [ref=e750]
+                  - row "3663592 0.5" [ref=e752]:
+                    - cell "3663592" [ref=e753]
+                    - cell "0.5" [ref=e754]
+                  - row "3663593 0.5" [ref=e756]:
+                    - cell "3663593" [ref=e757]
+                    - cell "0.5" [ref=e758]
+                  - row "3663594 0.5" [ref=e760]:
+                    - cell "3663594" [ref=e761]
+                    - cell "0.5" [ref=e762]
+                  - row "3663595 0.5" [ref=e764]:
+                    - cell "3663595" [ref=e765]
+                    - cell "0.5" [ref=e766]
+                  - row "3663596 0.5" [ref=e768]:
+                    - cell "3663596" [ref=e769]
+                    - cell "0.5" [ref=e770]
+                  - row "3663597 0.5" [ref=e772]:
+                    - cell "3663597" [ref=e773]
+                    - cell "0.5" [ref=e774]
+                  - row "3663598 0.5" [ref=e776]:
+                    - cell "3663598" [ref=e777]
+                    - cell "0.5" [ref=e778]
+            - generic [ref=e779]:
+              - generic [ref=e781]:
+                - generic [ref=e782]:
+                  - heading "Data Explorer" [level=2] [ref=e783]
+                  - paragraph [ref=e784]: 1.35 GB
+                - list [ref=e785]:
+                  - listitem [ref=e786]:
+                    - generic [ref=e787] [cursor=pointer]:
+                      - generic [ref=e789]: calendar_view_week
+                      - paragraph [ref=e793]: sample_submission.csv
+                  - listitem [ref=e794]:
+                    - generic [ref=e795] [cursor=pointer]:
+                      - generic [ref=e797]: calendar_view_week
+                      - paragraph [ref=e801]: test_identity.csv
+                  - listitem [ref=e802]:
+                    - generic [ref=e803] [cursor=pointer]:
+                      - generic [ref=e805]: calendar_view_week
+                      - paragraph [ref=e809]: test_transaction.csv
+                  - listitem [ref=e810]:
+                    - generic [ref=e811] [cursor=pointer]:
+                      - generic [ref=e813]: calendar_view_week
+                      - paragraph [ref=e817]: train_identity.csv
+                  - listitem [ref=e818]:
+                    - generic [ref=e819] [cursor=pointer]:
+                      - generic [ref=e821]: calendar_view_week
+                      - paragraph [ref=e825]: train_transaction.csv
+              - generic [ref=e826]:
+                - heading "Summary" [level=2] [ref=e827]
+                - button "Expand 5 files" [ref=e829] [cursor=pointer]:
+                  - generic [ref=e831]: arrow_right
+                  - generic [ref=e833]: folder
+                  - paragraph [ref=e834]: 5 files
+                - button "Expand 871 columns" [ref=e836] [cursor=pointer]:
+                  - generic [ref=e838]: arrow_right
+                  - generic [ref=e840]: calendar_view_week
+                  - paragraph [ref=e841]: 871 columns
+              - button "Download all files" [ref=e843] [cursor=pointer]:
+                - generic [ref=e844]: get_app
+                - generic [ref=e845]: Download All
+          - generic [ref=e846]:
+            - code [ref=e847]:
+              - generic [ref=e848]: Download using Kaggle CLI
+              - generic [ref=e849]:
+                - generic [ref=e850]:
+                  - generic [ref=e851]: navigate_next
+                  - generic [ref=e852]: minimize
+                - textbox "Download using Kaggle CLI" [disabled] [ref=e853]: kaggle competitions download -c ieee-fraud-detection
+                - generic [ref=e854]:
+                  - button "Copy" [ref=e857] [cursor=pointer]: content_copy
+                  - button "View CLI documentation" [ref=e860] [cursor=pointer]: help
+                - group:
+                  - generic: Download using Kaggle CLI
+              - paragraph:
+                - alert
+            - code [ref=e861]:
+              - generic [ref=e862]: Download using kagglehub
+              - generic [ref=e863]:
+                - generic [ref=e864]:
+                  - generic [ref=e865]: navigate_next
+                  - generic [ref=e866]: minimize
+                - textbox "Download using kagglehub" [disabled] [ref=e867]: kagglehub.competition_download('ieee-fraud-detection')
+                - generic [ref=e868]:
+                  - button "Copy" [ref=e871] [cursor=pointer]: content_copy
+                  - button "View kagglehub documentation" [ref=e874] [cursor=pointer]: help
+                - group:
+                  - generic: Download using kagglehub
+              - paragraph:
+                - alert
+        - generic [ref=e876]:
+          - generic [ref=e877]: text_snippet
+          - heading "Metadata" [level=2] [ref=e879]
+        - generic [ref=e880]:
+          - heading "License" [level=3] [ref=e883]
+          - generic [ref=e887] [cursor=pointer]: Subject to Competition Rules
+  - alert [ref=e889]

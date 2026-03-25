@@ -1,0 +1,60 @@
+[0m14:47:50.383477 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10445fa10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1059f3610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1059f3750>]}
+
+
+============================== 14:47:50.385324 | 94dfebc7-9734-4bb5-92c5-2ab4f4dc86ef ==============================
+[0m14:47:50.385324 [info ] [MainThread]: Running with dbt=1.11.7
+[0m14:47:50.385558 [debug] [MainThread]: running dbt with arguments {'send_anonymous_usage_stats': 'True', 'empty': 'None', 'log_cache_events': 'False', 'debug': 'False', 'log_path': 'logs', 'target_path': 'None', 'partial_parse': 'True', 'fail_fast': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'use_experimental_parser': 'False', 'invocation_command': 'dbt init dbt --skip-profile-setup', 'printer_width': '80', 'indirect_selection': 'eager', 'warn_error': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'profiles_dir': '/Users/raymondluo/.dbt', 'version_check': 'True', 'static_parser': 'True', 'quiet': 'False', 'write_json': 'True', 'no_print': 'None', 'log_format': 'default', 'use_colors': 'True'}
+[0m14:47:50.392679 [info ] [MainThread]: Creating dbt configuration folder at /Users/raymondluo/.dbt
+[0m14:47:50.393161 [error] [MainThread]: Encountered an error:
+
+[0m14:47:50.394373 [error] [MainThread]: Traceback (most recent call last):
+  File "/opt/miniconda3/lib/python3.13/site-packages/dbt/cli/requires.py", line 182, in wrapper
+    result, success = func(*args, **kwargs)
+                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/site-packages/dbt/cli/requires.py", line 128, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.13/site-packages/dbt/cli/main.py", line 483, in init
+    results = task.run()
+  File "/opt/miniconda3/lib/python3.13/site-packages/dbt/task/init.py", line 324, in run
+    project_name = self.get_valid_project_name()
+  File "/opt/miniconda3/lib/python3.13/site-packages/dbt/task/init.py", line 278, in get_valid_project_name
+    name = click.prompt("Enter a name for your project (letters, digits, underscore)")
+  File "/opt/miniconda3/lib/python3.13/site-packages/click/termui.py", line 171, in prompt
+    value = prompt_func(prompt)
+  File "/opt/miniconda3/lib/python3.13/site-packages/click/termui.py", line 154, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m14:47:50.395355 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": false, "command_wall_clock_time": 0.0480115, "process_in_blocks": "0", "process_kernel_time": 0.076238, "process_mem_max_rss": "114737152", "process_out_blocks": "0", "process_user_time": 0.529148}
+[0m14:47:50.395544 [debug] [MainThread]: Command `dbt init` failed at 14:47:50.395508 after 0.05 seconds
+[0m14:47:50.395670 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105ac4d60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105ad1910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10588fce0>]}
+[0m14:47:50.395819 [debug] [MainThread]: Flushing usage events
+[0m14:47:51.374869 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m14:47:58.175878 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1040ffa10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106583610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106583750>]}
+
+
+============================== 14:47:58.177630 | ec656a79-5723-463e-822a-86f4d7b7eebe ==============================
+[0m14:47:58.177630 [info ] [MainThread]: Running with dbt=1.11.7
+[0m14:47:58.177937 [debug] [MainThread]: running dbt with arguments {'quiet': 'False', 'target_path': 'None', 'invocation_command': 'dbt init risk_control --skip-profile-setup', 'warn_error': 'None', 'log_format': 'default', 'debug': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'introspect': 'True', 'empty': 'None', 'send_anonymous_usage_stats': 'True', 'use_experimental_parser': 'False', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_cache_events': 'False', 'use_colors': 'True', 'indirect_selection': 'eager', 'partial_parse': 'True', 'profiles_dir': '/Users/raymondluo/.dbt', 'write_json': 'True', 'no_print': 'None', 'version_check': 'True', 'printer_width': '80', 'log_path': 'logs'}
+[0m14:47:58.182682 [debug] [MainThread]: Starter project path: /opt/miniconda3/lib/python3.13/site-packages/dbt/include/starter_project
+[0m14:47:58.186270 [info ] [MainThread]: 
+Your new dbt project "risk_control" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m14:47:58.187327 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 0.043286, "process_in_blocks": "0", "process_kernel_time": 0.084869, "process_mem_max_rss": "114999296", "process_out_blocks": "0", "process_user_time": 0.533776}
+[0m14:47:58.187534 [debug] [MainThread]: Command `dbt init` succeeded at 14:47:58.187493 after 0.04 seconds
+[0m14:47:58.187675 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106654b00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10665d910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10631f020>]}
+[0m14:47:58.187806 [debug] [MainThread]: Flushing usage events
+[0m14:47:59.114574 [debug] [MainThread]: An error was encountered while trying to flush usage events
