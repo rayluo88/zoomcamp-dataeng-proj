@@ -1,3 +1,6 @@
+deployment:
+  basePath: /zoomcamp-dataeng-proj
+
 appearance:
   default: light
   switcher: false
