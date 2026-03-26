@@ -13,27 +13,47 @@ The Evidence.dev dashboard deploys as a static site. Vercel pulls sources from B
 
 ---
 
-## Step 1 — Prepare the Service Account Credentials
+## Step 1 — Generate a Vercel-ready `.env` file
 
-Vercel needs the GCP service account key as an environment variable (not a file).
-
-Copy the entire JSON content of your service account key:
+Run this command from the project root. It builds a single `.env.vercel` file with all required variables — including the GCP credentials minified to one line:
 
 ```bash
-cat credentials/pipeline-sa-key.json
+python3 -c "
+import json, os
+key = json.dumps(json.load(open('credentials/pipeline-sa-key.json')))
+llm_key = open('.env').read().split('LLM_API_KEY=')[1].split()[0] if 'LLM_API_KEY=' in open('.env').read() else 'your_llm_api_key'
+lines = [
+    f'GOOGLE_CREDENTIALS={key}',
+    f'LLM_API_KEY={llm_key}',
+    'LLM_BASE_URL=https://api.deepseek.com',
+    'LLM_MODEL=deepseek-chat',
+]
+open('.env.vercel', 'w').write('\n'.join(lines))
+print('Written to .env.vercel')
+"
 ```
 
-Keep this copied — you'll paste it into Vercel in Step 4.
+The output file `.env.vercel` will look like:
+
+```
+GOOGLE_CREDENTIALS={"type":"service_account","project_id":"financial-risk-control-system",...}
+LLM_API_KEY=sk-xxxxxxxx
+LLM_BASE_URL=https://api.deepseek.com
+LLM_MODEL=deepseek-chat
+```
+
+> `.env.vercel` is gitignored (it contains secrets). Never commit it.
+
+Add it to `.gitignore` if not already there:
+```bash
+echo ".env.vercel" >> .gitignore
+```
 
 ---
 
 ## Step 2 — Push Latest Code to GitHub
 
-Ensure `connection.yaml` (now using `service-account-key`) and updated `package.json` are committed and pushed:
-
 ```bash
-git add dashboard/sources/bigquery/connection.yaml dashboard/package.json
-git commit -m "configure BigQuery service account auth for Vercel deployment"
 git push
 ```
 
@@ -53,18 +73,16 @@ git push
 
 ---
 
-## Step 4 — Add Environment Variables
+## Step 4 — Bulk Import Environment Variables
 
-Still on the Configure Project screen, scroll to **Environment Variables** and add:
+Still on the **Configure Project** screen, scroll to **Environment Variables**:
 
-| Name | Value |
-|---|---|
-| `GOOGLE_CREDENTIALS` | *(paste the full JSON content from Step 1)* |
-| `LLM_API_KEY` | *(your DeepSeek API key, for narration regeneration)* |
-| `LLM_BASE_URL` | `https://api.deepseek.com` |
-| `LLM_MODEL` | `deepseek-chat` |
+1. Click anywhere in the **Key** input field
+2. **Paste the entire contents of `.env.vercel`** directly into that field
+3. Vercel detects the multi-line format and automatically splits it into individual variables
+4. Verify all 4 variables appear, then continue
 
-> The `LLM_*` variables are only needed if you want Vercel to regenerate narration on each deploy. If you pre-generate `dashboard/sources/narration/summary.csv` locally and commit it, you can skip these.
+> If Vercel doesn't auto-split on paste, use the **Import .env File** button (visible in the Environment Variables section) and select `.env.vercel`.
 
 ---
 

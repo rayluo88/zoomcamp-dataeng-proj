@@ -33,3 +33,4 @@ dbt/.user.yml
 data/*.csv
 data/*.zip
 data/*.parquet
+.env.vercel
