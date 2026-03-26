@@ -359,6 +359,28 @@ title: Risk Analytics Dashboard
 <h2 class="section-heading">Data Sources</h2>
 <p class="section-sub">Queries powering this dashboard, sourced from BigQuery <code>production</code> dataset</p>
 
+#### Daily Trend
+
+<DataTable data={daily} rows=5/>
+
+#### By Product Code
+
+<DataTable data={by_product}/>
+
+#### By Card Type
+
+<DataTable data={by_card}/>
+
+#### By Device Type
+
+<DataTable data={by_device}/>
+
+#### Amount Buckets
+
+<DataTable data={amount_buckets}/>
+
+---
+
 ```sql daily
 select
   dimension_value as txn_date,
