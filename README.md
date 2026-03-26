@@ -61,13 +61,13 @@ This system ingests, processes, and visualises **590,540 real-world e-commerce t
 ## 2. Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────────────────────┐
 │                         BATCH PIPELINE                                       │
 │                                                                              │
 │  Kaggle API                                                                  │
 │      │                                                                       │
 │      ▼                                                                       │
-│  CSV files  ──► Parquet conversion ──► GCS (raw/ieee_cis/)                  │
+│  CSV files  ──► Parquet conversion ──► GCS (raw/ieee_cis/)                   │
 │                                             │                                │
 │                                             ▼                                │
 │                                    BigQuery raw dataset                      │
@@ -75,7 +75,7 @@ This system ingests, processes, and visualises **590,540 real-world e-commerce t
 │                                             │                                │
 │                                             ▼                                │
 │                                    BigQuery staging                          │
-│                                    (dbt views: stg_*)                       │
+│                                    (dbt views: stg_*)                        │
 │                                             │                                │
 │                                             ▼                                │
 │                                    BigQuery production                       │
@@ -90,20 +90,20 @@ This system ingests, processes, and visualises **590,540 real-world e-commerce t
 │                                             ▼                                │
 │                                    Evidence.dev Dashboard                    │
 │                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+└──────────────────────────────────────────────────────────────────────────────┘
 
-┌─────────────────────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────────────────────┐
 │                         STREAMING PIPELINE                                   │
 │                                                                              │
 │  CSV replay                                                                  │
-│  (producer.py)  ──► Redpanda topic ──► Consumer (consumer.py)               │
+│  (producer.py)  ──► Redpanda topic ──► Consumer (consumer.py)                │
 │                     ieee_cis_            │                                   │
-│                     transactions         ├──► GCS raw/stream/YYYY/MM/DD/    │
+│                     transactions         ├──► GCS raw/stream/YYYY/MM/DD/     │
 │                                          └──► BigQuery raw.stream_txns       │
 │                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+└──────────────────────────────────────────────────────────────────────────────┘
 
-┌─────────────────────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────────────────────┐
 │                         ORCHESTRATION                                        │
 │                                                                              │
 │  Apache Airflow (Docker)                                                     │
@@ -119,17 +119,17 @@ This system ingests, processes, and visualises **590,540 real-world e-commerce t
 │         ▼                                                                    │
 │    create_bq_tables                                                          │
 │                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+└──────────────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         INFRASTRUCTURE (Terraform → GCP)                    │
-│                                                                              │
+│                                                                             │
 │  google_storage_bucket          financial-risk-control-system-datalake      │
 │  google_bigquery_dataset        raw / staging / production                  │
 │  google_service_account         risk-pipeline (Airflow, dbt, scripts)       │
 │  google_project_iam_member      storage.objectAdmin, bigquery.dataEditor    │
-│  google_service_account_key     → credentials/pipeline-sa-key.json         │
-│                                                                              │
+│  google_service_account_key     → credentials/pipeline-sa-key.json          │
+│                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
