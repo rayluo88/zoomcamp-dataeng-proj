@@ -167,6 +167,16 @@ This system ingests, processes, and visualises **590,540 real-world e-commerce t
 
 ### Streaming: Redpanda
 
+**Why streaming at all?**
+
+In production fraud detection, every millisecond matters. Transactions flow continuously from payment terminals, mobile apps, and e-commerce checkouts — not in daily batches. A batch pipeline that runs once a day would miss fraud happening *right now*. The real-world architecture is:
+
+1. A payment transaction is authorised → an event is published to an **event store** (Kafka/Redpanda topic)
+2. A **stream processor** consumes the event in near-real-time and runs fraud scoring
+3. The decision (approve / flag / decline) is returned before the merchant's timeout (~2–3 seconds)
+
+This project mirrors that architecture: `producer.py` replays IEEE-CIS transactions onto a Redpanda topic, and `consumer.py` streams them into the data lake and warehouse — the same pattern used in production Kafka-based fraud pipelines. The batch pipeline handles historical analysis; the streaming pipeline handles the live transaction flow.
+
 **Why Redpanda over Apache Kafka?**
 
 | Factor | Kafka | Redpanda |
