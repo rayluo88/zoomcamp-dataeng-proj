@@ -1,5 +1,5 @@
 ---
-title: Financial Risk Intelligence
+title: Risk Analytics Dashboard
 ---
 
 <style>
@@ -172,7 +172,192 @@ title: Financial Risk Intelligence
     display: flex;
     justify-content: space-between;
   }
+
+  .ai-narration {
+    background: #FAFAF7;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--text-muted);
+    border-radius: 2px;
+    padding: 16px 20px;
+    margin: 20px 0 8px;
+  }
+
+  .ai-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+
+  .ai-text {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-body);
+    margin: 0;
+    font-style: italic;
+  }
+
+  .ai-footer {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin: 8px 0 0;
+  }
 </style>
+
+<div class="header-block">
+  <h1>Financial Risk Intelligence</h1>
+  <p class="header-subtitle">IEEE-CIS Fraud Detection Analysis — 590,540 E-Commerce Transactions · Vesta Corporation</p>
+</div>
+
+<div class="kpi-grid">
+  <div class="kpi-card blue">
+    <p class="kpi-label">Transactions Analyzed</p>
+    <p class="kpi-value"><Value data={kpis} column=total_txns fmt='#,##0'/></p>
+    <p class="kpi-context">Full dataset</p>
+  </div>
+  <div class="kpi-card red">
+    <p class="kpi-label">Overall Fraud Rate</p>
+    <p class="kpi-value"><Value data={kpis} column=fraud_rate_pct fmt='0.00%'/></p>
+    <p class="kpi-context"><Value data={kpis} column=fraud_txns fmt='#,##0'/> transactions flagged</p>
+  </div>
+  <div class="kpi-card amber">
+    <p class="kpi-label">Fraud Exposure</p>
+    <p class="kpi-value">$<Value data={kpis} column=fraud_amt_m fmt='0.0"M"'/></p>
+    <p class="kpi-context">of $<Value data={kpis} column=total_amt_m fmt='0.0"M"'/> total volume</p>
+  </div>
+  <div class="kpi-card teal">
+    <p class="kpi-label">Highest Risk Segment</p>
+    <p class="kpi-value"><Value data={top_risk_segment} column=segment/></p>
+    <p class="kpi-context"><Value data={top_risk_segment} column=fraud_rate_pct fmt='0.00%'/> fraud rate</p>
+  </div>
+</div>
+
+{#if narration && narration.length > 0 && narration[0].executive_summary}
+<div class="ai-narration">
+  <p class="ai-label">AI-Generated Summary — verify against data above</p>
+  <p class="ai-text">{narration[0].executive_summary}</p>
+  <p class="ai-footer">Generated {narration[0].generated_at} · {narration[0].data_period}</p>
+</div>
+{/if}
+
+<hr class="section-rule"/>
+
+<h2 class="section-heading">Daily Fraud Activity</h2>
+<p class="section-sub">Transaction volume and fraud rate across the observation period</p>
+
+<LineChart
+  data={daily}
+  x=txn_date
+  y={["fraud_txns", "total_txns"]}
+  yAxisTitle="Transactions"
+  colorPalette={["#C23D2E", "#2B6B5E"]}
+  fillOpacity=0.15
+  lineWidth=2
+/>
+
+<p class="chart-note">Fraud rate averaged {(kpis[0].fraud_rate_pct * 100).toFixed(2)}% across the observation period. Daily series shows fraudulent transactions (red) against total volume (teal).</p>
+
+<hr class="section-rule"/>
+
+<h2 class="section-heading">Fraud Distribution by Category</h2>
+<p class="section-sub">Fraud rate and transaction volume across product codes and card types</p>
+
+<div class="two-col">
+  <div class="panel">
+    <p class="panel-title">By Product Code</p>
+    <BarChart
+      data={by_product}
+      x=product_cd
+      y=fraud_rate_pct
+      yAxisTitle="Fraud Rate %"
+      yFmt='0.00%'
+      colorPalette={["#C23D2E"]}
+      swapXY=true
+      labels=true
+    />
+  </div>
+  <div class="panel">
+    <p class="panel-title">By Card Type</p>
+    <BarChart
+      data={by_card}
+      x=card_type
+      y=fraud_rate_pct
+      yAxisTitle="Fraud Rate %"
+      yFmt='0.00%'
+      colorPalette={["#4A7FB5"]}
+      swapXY=true
+      labels=true
+    />
+  </div>
+</div>
+
+{#if narration && narration.length > 0 && narration[0].risk_highlights}
+<div class="ai-narration">
+  <p class="ai-label">AI-Generated Analysis — verify against charts above</p>
+  <p class="ai-text">{narration[0].risk_highlights} {narration[0].segment_analysis}</p>
+</div>
+{/if}
+
+<hr class="section-rule"/>
+
+<h2 class="section-heading">Transaction Profile</h2>
+<p class="section-sub">Fraud patterns by device type and product-level statistics</p>
+
+<div class="two-col">
+  <div class="panel">
+    <p class="panel-title">By Device Type</p>
+    <BarChart
+      data={by_device}
+      x=device_type
+      y=fraud_rate_pct
+      yAxisTitle="Fraud Rate %"
+      yFmt='0.00%'
+      colorPalette={["#7B6B8A"]}
+      swapXY=true
+      labels=true
+    />
+  </div>
+  <div class="panel">
+    <p class="panel-title">Product Code Summary</p>
+    <DataTable
+      data={by_product}
+      rows=10
+    >
+      <Column id=product_cd title="Product" />
+      <Column id=total_txns title="Total Txns" fmt='#,##0' />
+      <Column id=fraud_txns title="Fraud Txns" fmt='#,##0' />
+      <Column id=fraud_rate_pct title="Fraud Rate" fmt='0.00%' contentType=colorscale colorScale=negative />
+      <Column id=avg_txn_amt title="Avg Amt $" fmt='$#,##0.00' />
+    </DataTable>
+  </div>
+</div>
+
+<hr class="section-rule"/>
+
+<h2 class="section-heading">Risk by Transaction Size</h2>
+<p class="section-sub">Fraud rate across amount buckets — higher-value transactions show elevated risk</p>
+
+<BarChart
+  data={amount_buckets}
+  x=amount_bucket
+  y=fraud_rate_pct
+  yAxisTitle="Fraud Rate %"
+  yFmt='0.00%'
+  colorPalette={["#D4890A"]}
+  labels=true
+/>
+
+<p class="chart-note">Amount buckets: low (&lt;$50), medium ($50–$500), high ($500–$5,000), very_high (&gt;$5,000).</p>
+
+<hr class="section-rule"/>
+
+<h2 class="section-heading">Data Sources</h2>
+<p class="section-sub">Queries powering this dashboard, sourced from BigQuery <code>production</code> dataset</p>
 
 ```sql daily
 select
@@ -224,7 +409,7 @@ order by fraud_rate_pct desc
 ```sql kpis
 select
   sum(total_txns)                                                  as total_txns,
-  round(sum(fraud_txns) * 100.0 / sum(total_txns), 2)             as fraud_rate_pct,
+  round(sum(fraud_txns) / sum(total_txns), 6)                      as fraud_rate_pct,
   sum(fraud_txns)                                                  as fraud_txns,
   round(sum(fraud_amt) / 1000000, 2)                               as fraud_amt_m,
   round(sum(total_amt) / 1000000, 2)                               as total_amt_m
@@ -246,131 +431,9 @@ limit 1
 select * from bigquery.amount_buckets
 ```
 
-<div class="header-block">
-  <h1>Financial Risk Intelligence</h1>
-  <p class="header-subtitle">IEEE-CIS Fraud Detection Analysis — 590,540 E-Commerce Transactions · Vesta Corporation</p>
-</div>
-
-<div class="kpi-grid">
-  <div class="kpi-card blue">
-    <p class="kpi-label">Transactions Analyzed</p>
-    <p class="kpi-value"><Value data={kpis} column=total_txns fmt='#,##0'/></p>
-    <p class="kpi-context">Full dataset</p>
-  </div>
-  <div class="kpi-card red">
-    <p class="kpi-label">Overall Fraud Rate</p>
-    <p class="kpi-value"><Value data={kpis} column=fraud_rate_pct fmt='0.00"%"'/></p>
-    <p class="kpi-context"><Value data={kpis} column=fraud_txns fmt='#,##0'/> transactions flagged</p>
-  </div>
-  <div class="kpi-card amber">
-    <p class="kpi-label">Fraud Exposure</p>
-    <p class="kpi-value">$<Value data={kpis} column=fraud_amt_m fmt='0.0"M"'/></p>
-    <p class="kpi-context">of $<Value data={kpis} column=total_amt_m fmt='0.0"M"'/> total volume</p>
-  </div>
-  <div class="kpi-card teal">
-    <p class="kpi-label">Highest Risk Segment</p>
-    <p class="kpi-value"><Value data={top_risk_segment} column=segment/></p>
-    <p class="kpi-context"><Value data={top_risk_segment} column=fraud_rate_pct fmt='0.00"%"'/> fraud rate</p>
-  </div>
-</div>
-
-<hr class="section-rule"/>
-
-<h2 class="section-heading">Daily Fraud Activity</h2>
-<p class="section-sub">Transaction volume and fraud rate across the observation period</p>
-
-<LineChart
-  data={daily}
-  x=txn_date
-  y={["fraud_txns", "total_txns"]}
-  yAxisTitle="Transactions"
-  colorPalette={["#C23D2E", "#2B6B5E"]}
-  fillOpacity=0.15
-  lineWidth=2
-/>
-
-<p class="chart-note">Fraud rate averaged {kpis[0].fraud_rate_pct}% across the observation period. Daily series shows fraudulent transactions (red) against total volume (teal).</p>
-
-<hr class="section-rule"/>
-
-<h2 class="section-heading">Fraud Distribution by Category</h2>
-<p class="section-sub">Fraud rate and transaction volume across product codes and card types</p>
-
-<div class="two-col">
-  <div class="panel">
-    <p class="panel-title">By Product Code</p>
-    <BarChart
-      data={by_product}
-      x=product_cd
-      y=fraud_rate_pct
-      yAxisTitle="Fraud Rate %"
-      colorPalette={["#C23D2E"]}
-      swapXY=true
-      labels=true
-    />
-  </div>
-  <div class="panel">
-    <p class="panel-title">By Card Type</p>
-    <BarChart
-      data={by_card}
-      x=card_type
-      y=fraud_rate_pct
-      yAxisTitle="Fraud Rate %"
-      colorPalette={["#4A7FB5"]}
-      swapXY=true
-      labels=true
-    />
-  </div>
-</div>
-
-<hr class="section-rule"/>
-
-<h2 class="section-heading">Transaction Profile</h2>
-<p class="section-sub">Fraud patterns by device type and product-level statistics</p>
-
-<div class="two-col">
-  <div class="panel">
-    <p class="panel-title">By Device Type</p>
-    <BarChart
-      data={by_device}
-      x=device_type
-      y=fraud_rate_pct
-      yAxisTitle="Fraud Rate %"
-      colorPalette={["#7B6B8A"]}
-      swapXY=true
-      labels=true
-    />
-  </div>
-  <div class="panel">
-    <p class="panel-title">Product Code Summary</p>
-    <DataTable
-      data={by_product}
-      rows=10
-    >
-      <Column id=product_cd title="Product" />
-      <Column id=total_txns title="Total Txns" fmt='#,##0' />
-      <Column id=fraud_txns title="Fraud Txns" fmt='#,##0' />
-      <Column id=fraud_rate_pct title="Fraud Rate" fmt='0.00"%"' contentType=colorscale colorScale=negative />
-      <Column id=avg_txn_amt title="Avg Amt $" fmt='$#,##0.00' />
-    </DataTable>
-  </div>
-</div>
-
-<hr class="section-rule"/>
-
-<h2 class="section-heading">Risk by Transaction Size</h2>
-<p class="section-sub">Fraud rate across amount buckets — higher-value transactions show elevated risk</p>
-
-<BarChart
-  data={amount_buckets}
-  x=amount_bucket
-  y=fraud_rate_pct
-  yAxisTitle="Fraud Rate %"
-  colorPalette={["#D4890A"]}
-  labels=true
-/>
-
-<p class="chart-note">Amount buckets: low (&lt;$50), medium ($50–$500), high ($500–$5,000), very_high (&gt;$5,000).</p>
+```sql narration
+select * from narration.summary
+```
 
 <div class="footer-rule"></div>
 <div class="footer-text">

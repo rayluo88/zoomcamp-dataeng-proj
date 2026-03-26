@@ -9,7 +9,7 @@ WITH daily AS (
     transaction_date,
     COUNT(*)                                          AS total_txns,
     COUNTIF(is_fraud)                                 AS fraud_txns,
-    ROUND(COUNTIF(is_fraud) / COUNT(*) * 100, 4)      AS fraud_rate_pct,
+    ROUND(COUNTIF(is_fraud) / COUNT(*), 6)            AS fraud_rate_pct,
     ROUND(SUM(transaction_amt), 2)                    AS total_amt,
     ROUND(SUM(IF(is_fraud, transaction_amt, 0)), 2)   AS fraud_amt
   FROM {{ ref('fct_transactions') }}
@@ -22,7 +22,7 @@ by_product AS (
     product_cd,
     COUNT(*)                                          AS total_txns,
     COUNTIF(is_fraud)                                 AS fraud_txns,
-    ROUND(COUNTIF(is_fraud) / COUNT(*) * 100, 4)      AS fraud_rate_pct,
+    ROUND(COUNTIF(is_fraud) / COUNT(*), 6)            AS fraud_rate_pct,
     ROUND(AVG(transaction_amt), 2)                    AS avg_txn_amt
   FROM {{ ref('fct_transactions') }}
   GROUP BY 1

@@ -1,7 +1,8 @@
 .PHONY: help setup infra infra-destroy ingest dbt-run dbt-test \
         stream-up stream-down stream-topic stream-produce stream-consume \
         airflow-up airflow-down airflow-logs \
-        dashboard-sources dashboard-dev dashboard-build \
+        narrate narrate-dry narrate-mock \
+        dashboard-sources dashboard-dev dashboard-build dashboard-full \
         clean
 
 # ─── Default ─────────────────────────────────────────────────────────────────
@@ -27,9 +28,14 @@ help:
 	@echo "  airflow-down      Stop Airflow"
 	@echo "  airflow-logs      Tail Airflow logs"
 	@echo ""
+	@echo "  narrate           Generate AI narration from mart data (requires LLM_API_KEY)"
+	@echo "  narrate-dry       Preview narration prompt without calling API"
+	@echo "  narrate-mock      Write sample narration (no BigQuery or API needed)"
+	@echo ""
 	@echo "  dashboard-sources Pull latest data from BigQuery"
 	@echo "  dashboard-dev     Start Evidence.dev dev server (http://localhost:3000)"
 	@echo "  dashboard-build   Build static dashboard for deployment"
+	@echo "  dashboard-full    Narrate + pull sources + build"
 	@echo ""
 	@echo "  clean             Stop all Docker services"
 	@echo ""
@@ -83,6 +89,16 @@ airflow-down:
 airflow-logs:
 	cd airflow && docker compose logs -f
 
+# ─── LLM Narration ───────────────────────────────────────────────────────────
+narrate:
+	uv run python scripts/generate_narration.py
+
+narrate-dry:
+	uv run python scripts/generate_narration.py --dry-run
+
+narrate-mock:
+	uv run python scripts/generate_narration.py --mock
+
 # ─── Dashboard ───────────────────────────────────────────────────────────────
 dashboard-sources:
 	cd dashboard && npm run sources
@@ -91,6 +107,9 @@ dashboard-dev: dashboard-sources
 	cd dashboard && npm run dev
 
 dashboard-build: dashboard-sources
+	cd dashboard && npm run build
+
+dashboard-full: narrate dashboard-sources
 	cd dashboard && npm run build
 
 # ─── Cleanup ─────────────────────────────────────────────────────────────────
