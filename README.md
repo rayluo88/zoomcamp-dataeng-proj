@@ -12,6 +12,8 @@
 
 **[Live Dashboard →](https://rayluo88.github.io/zoomcamp-dataeng-proj/)**
 
+![Dashboard Preview](Screenshot_dashboard.png)
+
 ---
 
 ## Table of Contents
