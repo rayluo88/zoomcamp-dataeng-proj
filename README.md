@@ -367,6 +367,7 @@ uv run dbt run   # that's it
 │   └── vercel.json               # Vercel deployment config
 │
 ├── docs/
+│   ├── deploy-github-pages.md    # GitHub Pages deployment + GCP credential lessons
 │   └── deploy-vercel.md          # Step-by-step Vercel deployment guide
 ├── pyproject.toml                # Python dependencies (uv)
 ├── uv.lock                       # Locked dependency versions
@@ -667,6 +668,8 @@ make dashboard-dev
 The narration is grounded entirely in pre-aggregated dbt mart data. The LLM has no access to raw transactions and no role in computing risk scores — it only translates verified numbers into readable prose.
 
 See [`dashboard/DESIGN.md`](dashboard/DESIGN.md) for full design rationale and color palette.
+See [`docs/deploy-github-pages.md`](docs/deploy-github-pages.md) for the recommended GitHub Pages deployment (includes a detailed explanation of the GCP credentials-in-CI problem and solution).
+
 See [`docs/deploy-vercel.md`](docs/deploy-vercel.md) for Vercel deployment instructions.
 
 ---
