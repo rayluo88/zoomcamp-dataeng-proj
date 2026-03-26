@@ -10,6 +10,8 @@
 ![Evidence](https://img.shields.io/badge/Dashboard-Evidence.dev-0F172A)
 ![AI](https://img.shields.io/badge/AI-LLM%20Narration-8B5CF6)
 
+**[Live Dashboard →](https://rayluo88.github.io/zoomcamp-dataeng-proj/)**
+
 ---
 
 ## Table of Contents

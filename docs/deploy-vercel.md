@@ -73,16 +73,39 @@ git push
 
 ---
 
-## Step 4 — Bulk Import Environment Variables
+## Step 4 — Add Environment Variables
 
-Still on the **Configure Project** screen, scroll to **Environment Variables**:
+`GOOGLE_CREDENTIALS` must be added **individually** — its value contains `=` signs (inside the base64-encoded private key) that confuse bulk import parsers and cause truncation. The other 3 variables are safe to bulk import.
 
-1. Click anywhere in the **Key** input field
-2. **Paste the entire contents of `.env.vercel`** directly into that field
-3. Vercel detects the multi-line format and automatically splits it into individual variables
-4. Verify all 4 variables appear, then continue
+### 4a — Add GOOGLE_CREDENTIALS individually
 
-> If Vercel doesn't auto-split on paste, use the **Import .env File** button (visible in the Environment Variables section) and select `.env.vercel`.
+1. In the **Environment Variables** section, click **Add**
+2. **Key**: `GOOGLE_CREDENTIALS`
+3. **Value**: paste the single-line JSON output of:
+
+```bash
+python3 -c "import json; print(json.dumps(json.load(open('credentials/pipeline-sa-key.json'))))"
+```
+
+Paste the full output into the **Value** field only (not the key name).
+
+### 4b — Bulk import the remaining 3 variables
+
+Create a trimmed file without `GOOGLE_CREDENTIALS`:
+
+```bash
+grep -v "^GOOGLE_CREDENTIALS=" .env.vercel > .env.vercel.rest
+```
+
+Then paste the contents of `.env.vercel.rest` into the **Key** field — Vercel will auto-split these correctly:
+
+```
+LLM_API_KEY=sk-xxxxxxxx
+LLM_BASE_URL=https://api.deepseek.com
+LLM_MODEL=deepseek-chat
+```
+
+> **Why separate?** The `private_key` in the service account JSON contains many `=` characters (base64 padding). Vercel's bulk importer splits on `=`, so the JSON gets corrupted mid-value — which is why `client_email` goes missing.
 
 ---
 
