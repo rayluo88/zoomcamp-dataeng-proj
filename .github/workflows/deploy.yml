@@ -34,10 +34,14 @@ jobs:
         working-directory: dashboard
         run: npm install
 
+      - name: Set up GCP credentials
+        run: |
+          echo '${{ secrets.GOOGLE_CREDENTIALS }}' > /tmp/gcp-key.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json" >> $GITHUB_ENV
+
       - name: Build Evidence dashboard
         working-directory: dashboard
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_BASE_URL: https://api.deepseek.com
           LLM_MODEL: deepseek-chat
