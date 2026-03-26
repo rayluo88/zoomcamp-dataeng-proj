@@ -8,6 +8,7 @@
 ![Redpanda](https://img.shields.io/badge/Streaming-Redpanda-FF3C00?logo=apachekafka&logoColor=white)
 ![dbt](https://img.shields.io/badge/Transform-dbt-FF694B?logo=dbt&logoColor=white)
 ![Evidence](https://img.shields.io/badge/Dashboard-Evidence.dev-0F172A)
+![AI](https://img.shields.io/badge/AI-LLM%20Narration-8B5CF6)
 
 ---
 
@@ -20,7 +21,7 @@
 5. [Data Pipeline](#5-data-pipeline)
 6. [Setup & Reproduction](#6-setup--reproduction)
 7. [Evaluation Criteria](#7-evaluation-criteria)
-8. [Dashboard](#8-dashboard)
+8. [Dashboard & Agentic AI](#8-dashboard--agentic-ai)
 9. [Acknowledgements](#9-acknowledgements)
 
 ---
@@ -75,6 +76,12 @@ This system ingests, processes, and visualises **590,540 real-world e-commerce t
 │                                             ▼                                │
 │                                    BigQuery production                       │
 │                                    (dbt tables: fct_*, mart_*)               │
+│                                             │                                │
+│                                             ▼                                │
+│                                    LLM Narration Layer                       │
+│                                    (generate_narration.py)                   │
+│                                    DeepSeek / any OpenAI-compatible API      │
+│                                    → dashboard/sources/narration/            │
 │                                             │                                │
 │                                             ▼                                │
 │                                    Evidence.dev Dashboard                    │
@@ -225,6 +232,50 @@ Looker Studio is powerful but has limited design control and requires a Google a
 
 ---
 
+### Agentic AI: LLM Narration Layer
+
+This project goes beyond static analytics by adding a **provider-agnostic LLM narration layer** that generates natural-language summaries of fraud patterns at build time.
+
+**Architecture principle**: the LLM narrates verified facts — it has **no role in fraud detection**. Risk scores come entirely from dbt/BigQuery; the LLM only translates aggregated numbers into readable prose.
+
+```
+mart_risk_summary (BigQuery)  ─►  generate_narration.py  ─►  DeepSeek API
+                                          │
+                                          ▼
+                              dashboard/sources/narration/summary.csv
+                                          │
+                                          ▼
+                              Evidence.dev renders AI blocks
+                              (labeled "AI-Generated — verify against charts above")
+```
+
+**Provider-agnostic design** — swap LLM providers by changing three environment variables:
+
+| Provider | `LLM_BASE_URL` | `LLM_MODEL` |
+|---|---|---|
+| **DeepSeek** (default) | `https://api.deepseek.com` | `deepseek-chat` |
+| OpenAI | `https://api.openai.com/v1` | `gpt-4o-mini` |
+| Groq (free) | `https://api.groq.com/openai/v1` | `llama-3.3-70b-versatile` |
+| Ollama (local) | `http://localhost:11434/v1` | `llama3.2` |
+
+Uses the `openai` Python SDK — one interface, any provider.
+
+**Hallucination guardrails** — three layers ensure LLM output doesn't pollute analytics:
+
+1. **Input constraints**: LLM only receives pre-aggregated JSON (no raw transactions, no PII)
+2. **Prompt constraints**: system prompt prohibits fabrication, causation claims, and predictions
+3. **Output validation**: JSON parse check, cross-reference numbers against source data, length limits
+4. **Graceful degradation**: if narration fails, dashboard renders perfectly without it
+
+```bash
+make narrate          # Generate narration from live BigQuery data
+make narrate-dry      # Preview prompt without calling API
+make narrate-mock     # Write sample output (no BigQuery or API needed)
+make dashboard-full   # Narrate + pull sources + build in one step
+```
+
+---
+
 ### Python Package Management: uv
 
 **Why uv over pip/venv?**
@@ -261,7 +312,8 @@ uv run dbt run   # that's it
 │       └── risk_batch_ingest.py  # DAG: download → parquet → GCS → BigQuery
 │
 ├── scripts/
-│   └── ingest_to_gcs.py          # Standalone batch ingestion script
+│   ├── ingest_to_gcs.py          # Standalone batch ingestion script
+│   └── generate_narration.py     # LLM narration: BigQuery → DeepSeek API → CSV
 │
 ├── bigquery/
 │   ├── staging_tables.sql        # Staging layer DDL (run once)
@@ -290,13 +342,18 @@ uv run dbt run   # that's it
 │   ├── DESIGN.md                 # Design specification and rationale
 │   ├── evidence.config.yaml      # Theme, color palette, plugins
 │   ├── sources/bigquery/         # BigQuery SQL queries
-│   │   ├── connection.yaml       # gcloud-cli authentication
+│   │   ├── connection.yaml       # Service account key authentication (Vercel-ready)
 │   │   ├── risk_summary.sql      # mart_risk_summary query
 │   │   └── amount_buckets.sql    # fct_transactions aggregation
+│   ├── sources/narration/        # LLM narration source (CSV connector)
+│   │   ├── connection.yaml       # Evidence.dev CSV connector config
+│   │   └── summary.csv           # Generated by scripts/generate_narration.py
 │   ├── pages/
-│   │   └── index.md              # Dashboard page: SQL + chart components
+│   │   └── index.md              # Dashboard page: SQL + chart components + AI narration blocks
 │   └── vercel.json               # Vercel deployment config
 │
+├── docs/
+│   └── deploy-vercel.md          # Step-by-step Vercel deployment guide
 ├── pyproject.toml                # Python dependencies (uv)
 ├── uv.lock                       # Locked dependency versions
 ├── Makefile                      # One-command operations
@@ -464,11 +521,25 @@ make stream-produce     # Sends 1000 messages
 
 Console UI: [http://localhost:8080](http://localhost:8080)
 
-### Step 11 — Launch Dashboard
+### Step 11 — Generate AI Narration (optional)
+
+```bash
+# Set your LLM API key in .env (defaults to DeepSeek)
+# LLM_API_KEY=sk-...
+make narrate
+# Queries BigQuery mart → calls LLM API → writes dashboard/sources/narration/summary.csv
+```
+
+Skip this step to run the dashboard without AI narration — it degrades gracefully.
+
+### Step 12 — Launch Dashboard
 
 ```bash
 make dashboard-dev
 # Opens http://localhost:3000
+
+# Or, to narrate + pull sources + build in one step:
+make dashboard-full
 ```
 
 ---
@@ -555,7 +626,7 @@ Technology: Evidence.dev compiles to a static site (deployed on Vercel) — no r
 
 ---
 
-## 8. Dashboard
+## 8. Dashboard & Agentic AI
 
 The dashboard uses an editorial "Broadsheet Analytical" design — Financial Times / Economist aesthetic with a warm ivory background, DM Serif Display headings, and JetBrains Mono data values.
 
@@ -565,16 +636,24 @@ make dashboard-dev
 # Opens http://localhost:3000
 ```
 
-**Tiles**:
+**Visualisation tiles**:
 1. **KPI Strip** — Total transactions, overall fraud rate (3.5%), total fraud exposure ($M), highest-risk product segment
 2. **Daily Fraud Activity** *(temporal distribution)* — Line chart of fraud count and total volume over time
 3. **Fraud by Product Code** *(categorical distribution)* — Horizontal bars ranked by fraud rate
 4. **Fraud by Card Type** *(categorical distribution)* — Horizontal bars (visa, mastercard, discover, amex)
 5. **Fraud by Device Type** — Desktop vs mobile vs other
 6. **Risk by Transaction Size** — Fraud rate across `low/medium/high/very_high` amount buckets
-7. **Product Summary Table** — Fraud rate with conditional formatting (red > 5%, green < 3%)
+7. **Product Summary Table** — Fraud rate with conditional formatting
+
+**AI narration blocks** — two AI-generated summaries appear on the dashboard, clearly labelled _"AI-Generated Summary — verify against data above"_:
+
+- **Executive summary** (below KPIs): overall fraud rate, transaction volume, financial exposure, and data period
+- **Risk analysis** (below category charts): highest-risk segments, card type patterns, device type observations
+
+The narration is grounded entirely in pre-aggregated dbt mart data. The LLM has no access to raw transactions and no role in computing risk scores — it only translates verified numbers into readable prose.
 
 See [`dashboard/DESIGN.md`](dashboard/DESIGN.md) for full design rationale and color palette.
+See [`docs/deploy-vercel.md`](docs/deploy-vercel.md) for Vercel deployment instructions.
 
 ---
 
